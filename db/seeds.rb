@@ -10,7 +10,7 @@ require "faker"
 
 Flat.destroy_all
 
-5.times do 
+5.times do
     flat = Flat.new(
         name: Faker::Restaurant.name,
         address: Faker::Address.street_address,
@@ -20,3 +20,4 @@ Flat.destroy_all
     )
     flat.save!
 end
+

@@ -3,4 +3,6 @@ Rails.application.routes.draw do
   root to: "flats#index"
   resources :flats
 
+  get '/query=:name', to: 'flats#search', as: :search_flat
+
 end

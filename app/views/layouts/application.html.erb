@@ -10,11 +10,8 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a href="#" class="navbar-brand">Simple Airbnb</a>
-    </nav>
+  <body class= "container">
+    <%= render 'navbar' %>
     <%= yield %>
   </body>
 </html>

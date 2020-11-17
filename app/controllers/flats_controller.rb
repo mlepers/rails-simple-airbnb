@@ -1,7 +1,7 @@
 class FlatsController < ApplicationController
-    
+
     before_action :set_flat, only: [:show, :edit, :update, :destroy]
-    
+
     def index
         @flats = Flat.all
     end
@@ -11,9 +11,9 @@ class FlatsController < ApplicationController
     end
 
     def create
-        @flat = Flat.new(params[:restaurant])
+        @flat = Flat.new(flat_params)
         if @flat.save
-            redirect_to @flat, notice: 'Flat was successfully created.'
+            redirect_to @flat
           else
             render :new
           end
@@ -22,8 +22,21 @@ class FlatsController < ApplicationController
     def show
     end
 
+    def search
+      name = params[:name]
+      @flats = Flat.where("name LIKE '%#{name}%'")
+    end
+
     def edit
     end
+
+    def update
+    if @flat.update(flat_params)
+      redirect_to @flat
+    else
+      render :edit
+    end
+  end
 
 
     def destroy
@@ -36,5 +49,9 @@ class FlatsController < ApplicationController
     def set_flat
         @flat = Flat.find(params[:id])
     end
-    
+
+    def flat_params
+      params.require(:flat).permit(:name, :address, :description, :price_per_night, :number_of_guests)
+    end
+
 end
