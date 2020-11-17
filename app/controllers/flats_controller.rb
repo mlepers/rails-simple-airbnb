@@ -3,8 +3,14 @@ class FlatsController < ApplicationController
     before_action :set_flat, only: [:show, :edit, :update, :destroy]
 
     def index
-        @flats = Flat.all
+        if params[:query].present?
+          name = params[:query]
+          @flats = Flat.where("name LIKE '%#{name}%'")
+        else
+          @flats = Flat.all
+        end
     end
+
 
     def new
         @flat = Flat.new
@@ -22,10 +28,7 @@ class FlatsController < ApplicationController
     def show
     end
 
-    def search
-      name = params[:name]
-      @flats = Flat.where("name LIKE '%#{name}%'")
-    end
+
 
     def edit
     end
